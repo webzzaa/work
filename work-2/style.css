@@ -1,0 +1,1009 @@
+/* 
+ * 萌兔家园 - 样式表
+ * 包含兔子造型、场景样式、动画效果和界面元素
+ */
+
+/* ==================== CSS变量定义 ==================== */
+:root {
+    /* 主色调 - 温暖柔和的配色方案 */
+    --primary-pink: #FFB6C1;
+    --soft-pink: #FFE4E1;
+    --light-pink: #FFF0F5;
+    --warm-cream: #FFFDD0;
+    --soft-brown: #D2B48C;
+    --warm-brown: #C4A484;
+    --fresh-green: #90EE90;
+    --soft-green: #98FB98;
+    --sky-blue: #87CEEB;
+    --warm-yellow: #FFFACD;
+    --soft-white: #FFFAFA;
+    
+    /* 兔子颜色 */
+    --rabbit-white: #FFFAFA;
+    --rabbit-pink: #FFC0CB;
+    --rabbit-ear-pink: #FFB6C1;
+    --rabbit-eye-color: #4A4A4A;
+    --rabbit-nose-color: #FF69B4;
+    
+    /* 食物颜色 */
+    --grass-green: #228B22;
+    --water-blue: #4682B4;
+    --carrot-orange: #FF8C00;
+    --berry-red: #DC143C;
+    
+    /* 界面颜色 */
+    --panel-bg: rgba(255, 240, 245, 0.95);
+    --btn-start: #98FB98;
+    --btn-pause: #FFD700;
+    --btn-reset: #FFB6C1;
+    
+    /* 动画时间 */
+    --dance-speed: 0.5s;
+    --walk-cycle: 0.4s;
+    --eat-duration: 0.3s;
+    --bounce-duration: 0.6s;
+}
+
+/* ==================== 全局样式 ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, #FFB6C1 0%, #FFFAFA 50%, #98FB98 100%);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* ==================== 游戏容器 ==================== */
+.game-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* ==================== 游戏场景 ==================== */
+.game-scene {
+    flex: 1;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.1),
+        inset 0 0 100px rgba(255, 255, 255, 0.3);
+}
+
+/* 天空 */
+.sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(180deg, 
+        #87CEEB 0%, 
+        #B0E0E6 50%, 
+        #E0F6FF 100%);
+}
+
+/* 太阳 */
+.sun {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, 
+        #FFFACD 0%, 
+        #FFD700 50%, 
+        #FFA500 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 60px #FFD700,
+        0 0 100px #FFA500;
+    animation: sunGlow 3s ease-in-out infinite;
+}
+
+@keyframes sunGlow {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.9; }
+}
+
+/* 云朵 */
+.clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.05),
+        inset 0 -5px 15px rgba(200, 200, 200, 0.2);
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.cloud-1 {
+    top: 30px;
+    left: 10%;
+    width: 120px;
+    height: 40px;
+    animation: floatCloud 20s linear infinite;
+}
+
+.cloud-1::before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 20px;
+}
+
+.cloud-1::after {
+    width: 35px;
+    height: 35px;
+    top: -18px;
+    right: 20px;
+}
+
+.cloud-2 {
+    top: 80px;
+    right: 15%;
+    width: 100px;
+    height: 35px;
+    animation: floatCloud 25s linear infinite reverse;
+}
+
+.cloud-2::before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 15px;
+}
+
+.cloud-2::after {
+    width: 30px;
+    height: 30px;
+    top: -15px;
+    right: 15px;
+}
+
+@keyframes floatCloud {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100px); }
+}
+
+/* 地面 */
+.ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, 
+        #90EE90 0%, 
+        #7CCD7C 30%, 
+        #5CAD5C 100%);
+    border-top: 4px solid #4CAF50;
+}
+
+/* 草地区域 */
+.grass-area {
+    position: absolute;
+    bottom: 35%;
+    left: 0;
+    right: 0;
+    height: 15%;
+    background: 
+        linear-gradient(180deg, 
+            transparent 0%, 
+            rgba(144, 238, 144, 0.5) 100%);
+}
+
+/* 池塘 */
+.pond {
+    position: absolute;
+    bottom: 5%;
+    right: 10%;
+    width: 150px;
+    height: 80px;
+    background: radial-gradient(ellipse, 
+        #87CEEB 0%, 
+        #4682B4 70%, 
+        #2E8B57 100%);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 5px 20px rgba(255, 255, 255, 0.3),
+        0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 池塘波纹动画 */
+.pond::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 30%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    animation: ripple 3s ease-in-out infinite;
+}
+
+@keyframes ripple {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+}
+
+/* 游戏元素容器 */
+#game-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* ==================== 兔子样式 ==================== */
+.rabbit {
+    position: absolute;
+    width: 80px;
+    height: 100px;
+    cursor: pointer;
+    pointer-events: auto;
+    transform-origin: center bottom;
+    transition: transform 0.1s ease-out;
+    z-index: 100;
+}
+
+.rabbit:hover {
+    transform: scale(1.05);
+}
+
+/* 兔子身体 */
+.rabbit-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 兔子头部 */
+.rabbit-head {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 45px;
+    background: var(--rabbit-white);
+    border-radius: 50% 50% 45% 45%;
+    box-shadow: 
+        0 3px 10px rgba(0, 0, 0, 0.1),
+        inset 0 -5px 15px rgba(255, 182, 193, 0.3);
+    z-index: 10;
+}
+
+/* 兔子耳朵 */
+.rabbit-ear {
+    position: absolute;
+    top: -35px;
+    width: 15px;
+    height: 45px;
+    background: var(--rabbit-white);
+    border-radius: 50% 50% 45% 45%;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        inset 0 -5px 10px rgba(255, 182, 193, 0.4);
+}
+
+.rabbit-ear.left {
+    left: 5px;
+    transform: rotate(-15deg);
+    animation: earWiggleLeft 2s ease-in-out infinite;
+}
+
+.rabbit-ear.right {
+    right: 5px;
+    transform: rotate(15deg);
+    animation: earWiggleRight 2s ease-in-out infinite;
+}
+
+.rabbit-ear::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 30px;
+    background: linear-gradient(180deg, 
+        var(--rabbit-ear-pink) 0%, 
+        rgba(255, 182, 193, 0.6) 100%);
+    border-radius: 50%;
+}
+
+@keyframes earWiggleLeft {
+    0%, 100% { transform: rotate(-15deg); }
+    50% { transform: rotate(-20deg); }
+}
+
+@keyframes earWiggleRight {
+    0%, 100% { transform: rotate(15deg); }
+    50% { transform: rotate(20deg); }
+}
+
+/* 兔子脸部 */
+.rabbit-face {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 30px;
+}
+
+/* 兔子眼睛 */
+.rabbit-eye {
+    position: absolute;
+    top: 5px;
+    width: 8px;
+    height: 10px;
+    background: var(--rabbit-eye-color);
+    border-radius: 50%;
+    animation: blink 4s ease-in-out infinite;
+}
+
+.rabbit-eye.left {
+    left: 5px;
+}
+
+.rabbit-eye.right {
+    right: 5px;
+}
+
+.rabbit-eye::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+}
+
+@keyframes blink {
+    0%, 45%, 55%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.1); }
+}
+
+/* 兔子鼻子 */
+.rabbit-nose {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 6px;
+    background: var(--rabbit-nose-color);
+    border-radius: 50% 50% 40% 40%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 兔子嘴巴 */
+.rabbit-mouth {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 8px;
+    border-bottom: 2px solid #4A4A4A;
+    border-radius: 0 0 50% 50%;
+}
+
+.rabbit-mouth::before,
+.rabbit-mouth::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    width: 8px;
+    height: 8px;
+    border: 2px solid #4A4A4A;
+    border-top: none;
+    border-radius: 0 0 50% 50%;
+}
+
+.rabbit-mouth::before {
+    left: -8px;
+}
+
+.rabbit-mouth::after {
+    right: -8px;
+}
+
+/* 兔子腮红 */
+.rabbit-cheek {
+    position: absolute;
+    top: 12px;
+    width: 10px;
+    height: 8px;
+    background: var(--primary-pink);
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.rabbit-cheek.left {
+    left: 0;
+}
+
+.rabbit-cheek.right {
+    right: 0;
+}
+
+/* 兔子身体（躯干） */
+.rabbit-body-torso {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55px;
+    height: 45px;
+    background: var(--rabbit-white);
+    border-radius: 50% 50% 45% 45%;
+    box-shadow: 
+        0 3px 10px rgba(0, 0, 0, 0.08),
+        inset 0 -5px 15px rgba(255, 182, 193, 0.2);
+}
+
+/* 兔子尾巴 */
+.rabbit-tail {
+    position: absolute;
+    top: 50px;
+    right: -5px;
+    width: 18px;
+    height: 18px;
+    background: var(--rabbit-white);
+    border-radius: 50%;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        inset 0 -3px 8px rgba(255, 182, 193, 0.3);
+    animation: tailWag 1s ease-in-out infinite;
+}
+
+@keyframes tailWag {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+/* 兔子腿部 */
+.rabbit-leg {
+    position: absolute;
+    bottom: 0;
+    width: 12px;
+    height: 20px;
+    background: var(--rabbit-white);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.rabbit-leg.front-left {
+    left: 15px;
+    animation: legMove 0.4s ease-in-out infinite;
+}
+
+.rabbit-leg.front-right {
+    left: 28px;
+    animation: legMove 0.4s ease-in-out infinite 0.2s;
+}
+
+.rabbit-leg.back-left {
+    right: 28px;
+    animation: legMove 0.4s ease-in-out infinite 0.1s;
+}
+
+.rabbit-leg.back-right {
+    right: 15px;
+    animation: legMove 0.4s ease-in-out infinite 0.3s;
+}
+
+@keyframes legMove {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+}
+
+/* ==================== 兔子状态动画 ==================== */
+
+/* 行走动画 */
+.rabbit.walking .rabbit-leg {
+    animation-duration: 0.3s;
+}
+
+.rabbit.walking {
+    animation: bounce 0.3s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* 跳舞动画 - 快乐旋转 */
+.rabbit.dancing {
+    animation: danceSpin 0.5s ease-in-out infinite;
+}
+
+@keyframes danceSpin {
+    0%, 100% { transform: rotate(-10deg) translateX(0); }
+    25% { transform: rotate(10deg) translateX(5px); }
+    50% { transform: rotate(-10deg) translateX(0); }
+    75% { transform: rotate(10deg) translateX(-5px); }
+}
+
+/* 跳舞动画 - 欢快跳跃 */
+.rabbit.dancing-jump {
+    animation: happyJump 0.6s ease-in-out infinite;
+}
+
+@keyframes happyJump {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(-5deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(-15px) rotate(5deg); }
+}
+
+.rabbit.dancing-jump .rabbit-ear {
+    animation-duration: 0.3s;
+}
+
+/* 跳舞动画 - 摇摆舞 */
+.rabbit.dancing-sway {
+    animation: swayDance 0.7s ease-in-out infinite;
+}
+
+@keyframes swayDance {
+    0%, 100% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
+}
+
+.rabbit.dancing-sway .rabbit-ear {
+    animation: earDance 0.35s ease-in-out infinite;
+}
+
+@keyframes earDance {
+    0%, 100% { transform: rotate(var(--ear-rotation, -15deg)); }
+    50% { transform: rotate(calc(var(--ear-rotation, -15deg) * -1)); }
+}
+
+/* 进食动画 */
+.rabbit.eating {
+    animation: eatAnimation 0.3s ease-in-out;
+}
+
+@keyframes eatAnimation {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.9); }
+}
+
+.rabbit.eating .rabbit-mouth {
+    animation: munch 0.15s ease-in-out infinite;
+}
+
+@keyframes munch {
+    0%, 100% { transform: translateX(-50%) scaleX(1); }
+    50% { transform: translateX(-50%) scaleX(1.2); }
+}
+
+/* 成长阶段大小 */
+.rabbit.baby {
+    transform: scale(0.6);
+}
+
+.rabbit.teen {
+    transform: scale(0.8);
+}
+
+.rabbit.adult {
+    transform: scale(1.0);
+}
+
+.rabbit.elder {
+    transform: scale(1.1);
+    filter: grayscale(0.2);
+}
+
+/* ==================== 食物样式 ==================== */
+.food-item {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s ease;
+    z-index: 50;
+}
+
+.food-item:hover {
+    transform: scale(1.2);
+}
+
+.food-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+}
+
+/* 草料 */
+.food-item.grass .food-icon {
+    background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);
+    box-shadow: 
+        0 3px 10px rgba(34, 139, 34, 0.3),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.food-item.grass .food-icon::before {
+    content: '🌿';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+}
+
+/* 水 */
+.food-item.water .food-icon {
+    background: linear-gradient(135deg, #4682B4 0%, #87CEEB 100%);
+    box-shadow: 
+        0 3px 10px rgba(70, 130, 180, 0.3),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: waterWave 2s ease-in-out infinite;
+}
+
+.food-item.water .food-icon::before {
+    content: '💧';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+@keyframes waterWave {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+}
+
+/* 胡萝卜 */
+.food-item.carrot .food-icon {
+    background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+    box-shadow: 
+        0 3px 10px rgba(255, 140, 0, 0.3),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 40% 40% 60% 60%;
+}
+
+.food-item.carrot .food-icon::before {
+    content: '🥕';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+}
+
+/* 浆果 */
+.food-item.berry .food-icon {
+    background: linear-gradient(135deg, #DC143C 0%, #FF6B6B 100%);
+    box-shadow: 
+        0 3px 10px rgba(220, 20, 60, 0.3),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.food-item.berry .food-icon::before {
+    content: '🍓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+}
+
+/* 食物被吃掉动画 */
+.food-item.eaten {
+    animation: foodEaten 0.5s ease forwards;
+}
+
+@keyframes foodEaten {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.5; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* ==================== 心情气泡 ==================== */
+.mood-bubble {
+    position: absolute;
+    padding: 8px 15px;
+    background: white;
+    border-radius: 20px;
+    font-size: 20px;
+    box-shadow: 
+        0 3px 10px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(255, 182, 193, 0.3);
+    animation: bubbleFloat 2s ease-out forwards;
+    z-index: 200;
+    pointer-events: none;
+}
+
+.mood-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid white;
+}
+
+@keyframes bubbleFloat {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { transform: translateY(-10px) scale(1); opacity: 1; }
+    80% { transform: translateY(-30px) scale(1); opacity: 1; }
+    100% { transform: translateY(-50px) scale(0.8); opacity: 0; }
+}
+
+/* ==================== 控制面板 ==================== */
+.control-panel {
+    width: 280px;
+    background: var(--panel-bg);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.1),
+        inset 0 0 50px rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.control-panel h2 {
+    text-align: center;
+    color: var(--primary-pink);
+    font-size: 1.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+/* 状态显示 */
+.status-display {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.status-item:last-child {
+    margin-bottom: 0;
+}
+
+.status-label {
+    font-size: 0.9em;
+    color: #666;
+    min-width: 70px;
+}
+
+.status-value {
+    font-weight: bold;
+    color: var(--primary-pink);
+}
+
+/* 饥饿度条 */
+.hunger-bar {
+    flex: 1;
+    height: 12px;
+    background: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.hunger-fill {
+    height: 100%;
+    background: linear-gradient(90deg, 
+        #FF6B6B 0%, 
+        #FFD93D 50%, 
+        #6BCB77 100%);
+    border-radius: 6px;
+    transition: width 0.3s ease;
+    width: 100%;
+}
+
+/* 游戏控制按钮 */
+.game-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 8px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 3px 10px rgba(0, 0, 0, 0.1),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.15),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-start {
+    background: linear-gradient(135deg, #98FB98 0%, #90EE90 100%);
+    color: #228B22;
+}
+
+.btn-pause {
+    background: linear-gradient(135deg, #FFD700 0%, #FFC125 100%);
+    color: #B8860B;
+}
+
+.btn-reset {
+    background: linear-gradient(135deg, #FFB6C1 0%, #FFA0B0 100%);
+    color: #C71585;
+}
+
+/* 喂食控制区域 */
+.feeding-controls {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.feeding-controls h3 {
+    text-align: center;
+    color: var(--warm-brown);
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.feed-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.btn-feed {
+    padding: 15px 10px;
+    font-size: 0.85em;
+}
+
+.btn-grass {
+    background: linear-gradient(135deg, #90EE90 0%, #7CCD7C 100%);
+    color: #006400;
+}
+
+.btn-water {
+    background: linear-gradient(135deg, #87CEEB 0%, #6CA6CD 100%);
+    color: #00008B;
+}
+
+.btn-carrot {
+    background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+    color: #8B4500;
+}
+
+.btn-berry {
+    background: linear-gradient(135deg, #FF6B6B 0%, #DC143C 100%);
+    color: #8B0000;
+}
+
+/* 游戏说明 */
+.instructions {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.instructions h3 {
+    color: var(--warm-brown);
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.instructions ul {
+    list-style: none;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.instructions li {
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.instructions li::before {
+    content: '•';
+    position: absolute;
+    left: 5px;
+    color: var(--primary-pink);
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .control-panel {
+        width: 100%;
+        max-height: 40vh;
+        padding: 15px;
+    }
+    
+    .game-scene {
+        min-height: 50vh;
+    }
+    
+    .sun {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .pond {
+        width: 100px;
+        height: 50px;
+    }
+    
+    .control-panel h2 {
+        font-size: 1.2em;
+    }
+    
+    .game-controls {
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        padding: 10px 5px;
+        font-size: 0.8em;
+    }
+}

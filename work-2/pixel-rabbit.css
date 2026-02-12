@@ -1,0 +1,447 @@
+/* 
+ * 像素小兔 - 样式表
+ * 参考真实小兔子的浅棕色、圆润可爱特征
+ */
+
+/* ==================== CSS变量定义 ==================== */
+:root {
+    /* 像素兔颜色 - 参考真实兔子的浅棕色调 */
+    --pixel-rabbit-fur: #D4A574;        /* 主体浅棕色 */
+    --pixel-rabbit-fur-light: #E8C4A0;  /* 浅色毛发 */
+    --pixel-rabbit-fur-dark: #B8956A;   /* 深色毛发 */
+    --pixel-rabbit-ear-inner: #FFB6C1;  /* 耳朵内侧粉色 */
+    --pixel-rabbit-eye: #2C1810;        /* 深棕色眼睛 */
+    --pixel-rabbit-nose: #FF8C94;       /* 粉红色鼻子 */
+    --pixel-rabbit-blush: #FFB6C1;      /* 腮红 */
+    --pixel-rabbit-white: #FFF8F0;      /* 白色点缀 */
+    
+    /* 像素大小 */
+    --pixel-size: 4px;
+}
+
+/* ==================== 像素兔子容器 ==================== */
+.pixel-rabbit {
+    position: absolute;
+    width: calc(13 * var(--pixel-size));
+    height: calc(16 * var(--pixel-size));
+    cursor: pointer;
+    pointer-events: auto;
+    transform-origin: center bottom;
+    transition: transform 0.1s ease-out;
+    z-index: 100;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.pixel-rabbit:hover {
+    transform: scale(1.1);
+}
+
+/* ==================== 像素兔子身体 ==================== */
+.pixel-rabbit-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 像素兔子使用box-shadow绘制 */
+.pixel-rabbit-sprite {
+    position: absolute;
+    width: var(--pixel-size);
+    height: var(--pixel-size);
+    background: transparent;
+    top: 0;
+    left: 0;
+}
+
+/* 兔子站立姿态 - 13x16像素 */
+.pixel-rabbit-sprite.standing {
+    box-shadow:
+        /* 第1行 - 左耳 */
+        calc(3 * var(--pixel-size)) 0 var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) 0 var(--pixel-rabbit-fur),
+        /* 第2行 - 左耳 */
+        calc(2 * var(--pixel-size)) var(--pixel-size) var(--pixel-rabbit-fur),
+        calc(3 * var(--pixel-size)) var(--pixel-size) var(--pixel-rabbit-ear-inner),
+        calc(4 * var(--pixel-size)) var(--pixel-size) var(--pixel-rabbit-fur),
+        calc(8 * var(--pixel-size)) var(--pixel-size) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) var(--pixel-size) var(--pixel-rabbit-fur),
+        /* 第3行 - 耳朵 */
+        calc(2 * var(--pixel-size)) calc(2 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(3 * var(--pixel-size)) calc(2 * var(--pixel-size)) var(--pixel-rabbit-ear-inner),
+        calc(4 * var(--pixel-size)) calc(2 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(8 * var(--pixel-size)) calc(2 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) calc(2 * var(--pixel-size)) var(--pixel-rabbit-ear-inner),
+        calc(10 * var(--pixel-size)) calc(2 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第4行 - 耳朵和头顶 */
+        calc(2 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(3 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(5 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(6 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(7 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(8 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(10 * var(--pixel-size)) calc(3 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第5行 - 头部 */
+        calc(1 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(2 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(3 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(5 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(6 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(7 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(8 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(10 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(11 * var(--pixel-size)) calc(4 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第6行 - 眼睛和脸部 */
+        calc(1 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(2 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-blush),
+        calc(3 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-eye),
+        calc(4 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(5 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(6 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-nose),
+        calc(7 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(8 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-eye),
+        calc(9 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-blush),
+        calc(10 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(11 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第7行 - 嘴巴和脸颊 */
+        calc(1 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(2 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(3 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(5 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-white),
+        calc(6 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(7 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-white),
+        calc(8 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(10 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(11 * var(--pixel-size)) calc(6 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第8行 - 下巴 */
+        calc(2 * var(--pixel-size)) calc(7 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(3 * var(--pixel-size)) calc(7 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) calc(7 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(5 * var(--pixel-size)) calc(7 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(6 * var(--pixel-size)) calc(7 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(7 * var(--pixel-size)) calc(7 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(8 * var(--pixel-size)) calc(7 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) calc(7 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(10 * var(--pixel-size)) calc(7 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第9行 - 身体上部 */
+        calc(3 * var(--pixel-size)) calc(8 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) calc(8 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(5 * var(--pixel-size)) calc(8 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(6 * var(--pixel-size)) calc(8 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(7 * var(--pixel-size)) calc(8 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(8 * var(--pixel-size)) calc(8 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) calc(8 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第10行 - 身体中部 */
+        calc(2 * var(--pixel-size)) calc(9 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(3 * var(--pixel-size)) calc(9 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) calc(9 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(5 * var(--pixel-size)) calc(9 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(6 * var(--pixel-size)) calc(9 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(7 * var(--pixel-size)) calc(9 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(8 * var(--pixel-size)) calc(9 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) calc(9 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(10 * var(--pixel-size)) calc(9 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第11行 - 身体下部 */
+        calc(2 * var(--pixel-size)) calc(10 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(3 * var(--pixel-size)) calc(10 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) calc(10 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(5 * var(--pixel-size)) calc(10 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(6 * var(--pixel-size)) calc(10 * var(--pixel-size)) var(--pixel-rabbit-fur-light),
+        calc(7 * var(--pixel-size)) calc(10 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(8 * var(--pixel-size)) calc(10 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) calc(10 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(10 * var(--pixel-size)) calc(10 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第12行 - 尾巴 */
+        calc(0 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-white),
+        calc(1 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-white),
+        calc(2 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(3 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(5 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(6 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(7 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(8 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(9 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(10 * var(--pixel-size)) calc(11 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        /* 第13行 - 后腿和尾巴 */
+        calc(0 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-white),
+        calc(1 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(2 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(3 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(4 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(5 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(6 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(7 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-fur),
+        calc(8 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(9 * var(--pixel-size)) calc(12 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        /* 第14行 - 脚 */
+        calc(1 * var(--pixel-size)) calc(13 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(2 * var(--pixel-size)) calc(13 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(3 * var(--pixel-size)) calc(13 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(7 * var(--pixel-size)) calc(13 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(8 * var(--pixel-size)) calc(13 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(9 * var(--pixel-size)) calc(13 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        /* 第15行 - 脚掌 */
+        calc(1 * var(--pixel-size)) calc(14 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(2 * var(--pixel-size)) calc(14 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(3 * var(--pixel-size)) calc(14 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(7 * var(--pixel-size)) calc(14 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(8 * var(--pixel-size)) calc(14 * var(--pixel-size)) var(--pixel-rabbit-fur-dark),
+        calc(9 * var(--pixel-size)) calc(14 * var(--pixel-size)) var(--pixel-rabbit-fur-dark);
+}
+
+/* ==================== 像素兔子动画 ==================== */
+
+/* 眨眼动画 */
+@keyframes pixelBlink {
+    0%, 90%, 100% { 
+        box-shadow:
+            /* 第6行 - 眼睛睁开 */
+            calc(3 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-eye),
+            calc(8 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-eye);
+    }
+    95% { 
+        box-shadow:
+            /* 第6行 - 眼睛闭上 */
+            calc(3 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-fur),
+            calc(8 * var(--pixel-size)) calc(5 * var(--pixel-size)) var(--pixel-rabbit-fur);
+    }
+}
+
+/* 耳朵摆动动画 */
+@keyframes pixelEarWiggle {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-2px); }
+    75% { transform: translateY(1px); }
+}
+
+/* 尾巴摇摆动画 */
+@keyframes pixelTailWag {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(2px); }
+}
+
+/* 呼吸动画 */
+@keyframes pixelBreathe {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.02); }
+}
+
+/* 行走动画 */
+@keyframes pixelWalk {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* 跳跃动画 */
+@keyframes pixelJump {
+    0%, 100% { transform: translateY(0) scaleY(1); }
+    50% { transform: translateY(-15px) scaleY(0.9); }
+}
+
+/* 旋转跳舞动画 */
+@keyframes pixelDance {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+/* 进食动画 */
+@keyframes pixelEat {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.95); }
+}
+
+/* ==================== 兔子状态类 ==================== */
+
+/* 待机状态 - 轻微呼吸 */
+.pixel-rabbit.idle {
+    animation: pixelBreathe 2s ease-in-out infinite;
+}
+
+/* 行走状态 */
+.pixel-rabbit.walking {
+    animation: pixelWalk 0.3s ease-in-out infinite;
+}
+
+/* 跳舞状态 */
+.pixel-rabbit.dancing {
+    animation: pixelDance 0.5s ease-in-out infinite;
+}
+
+/* 跳跃状态 */
+.pixel-rabbit.jumping {
+    animation: pixelJump 0.6s ease-in-out infinite;
+}
+
+/* 进食状态 */
+.pixel-rabbit.eating {
+    animation: pixelEat 0.3s ease-in-out infinite;
+}
+
+/* 成长阶段大小 */
+.pixel-rabbit.baby {
+    --pixel-size: 3px;
+}
+
+.pixel-rabbit.teen {
+    --pixel-size: 4px;
+}
+
+.pixel-rabbit.adult {
+    --pixel-size: 5px;
+}
+
+.pixel-rabbit.elder {
+    --pixel-size: 5px;
+    filter: sepia(0.3);
+}
+
+/* ==================== 方向控制 ==================== */
+
+/* 面向左边 - 水平翻转 */
+.pixel-rabbit.facing-left {
+    transform: scaleX(-1);
+}
+
+.pixel-rabbit.facing-left:hover {
+    transform: scaleX(-1) scale(1.1);
+}
+
+/* ==================== 心情气泡像素风格 ==================== */
+.pixel-mood-bubble {
+    position: absolute;
+    padding: 6px 12px;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 4px;
+    font-size: 16px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+    animation: pixelBubbleFloat 2s ease-out forwards;
+    z-index: 200;
+    pointer-events: none;
+    image-rendering: pixelated;
+}
+
+.pixel-mood-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #333;
+}
+
+@keyframes pixelBubbleFloat {
+    0% { transform: translateY(0); opacity: 0; }
+    20% { transform: translateY(-5px); opacity: 1; }
+    80% { transform: translateY(-25px); opacity: 1; }
+    100% { transform: translateY(-40px); opacity: 0; }
+}
+
+/* ==================== 像素食物样式 ==================== */
+.pixel-food {
+    position: absolute;
+    width: calc(8 * var(--pixel-size));
+    height: calc(8 * var(--pixel-size));
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s ease;
+    z-index: 50;
+}
+
+.pixel-food:hover {
+    transform: scale(1.2);
+}
+
+/* 草料 */
+.pixel-food.grass::before {
+    content: '';
+    position: absolute;
+    width: var(--pixel-size);
+    height: var(--pixel-size);
+    background: transparent;
+    box-shadow:
+        calc(2 * var(--pixel-size)) calc(2 * var(--pixel-size)) #228B22,
+        calc(3 * var(--pixel-size)) calc(1 * var(--pixel-size)) #32CD32,
+        calc(4 * var(--pixel-size)) calc(2 * var(--pixel-size)) #228B22,
+        calc(5 * var(--pixel-size)) calc(1 * var(--pixel-size)) #32CD32,
+        calc(6 * var(--pixel-size)) calc(2 * var(--pixel-size)) #228B22,
+        calc(3 * var(--pixel-size)) calc(3 * var(--pixel-size)) #228B22,
+        calc(4 * var(--pixel-size)) calc(3 * var(--pixel-size)) #32CD32,
+        calc(5 * var(--pixel-size)) calc(3 * var(--pixel-size)) #228B22;
+}
+
+/* 水 */
+.pixel-food.water::before {
+    content: '';
+    position: absolute;
+    width: var(--pixel-size);
+    height: var(--pixel-size);
+    background: transparent;
+    box-shadow:
+        calc(2 * var(--pixel-size)) calc(3 * var(--pixel-size)) #4682B4,
+        calc(3 * var(--pixel-size)) calc(2 * var(--pixel-size)) #87CEEB,
+        calc(4 * var(--pixel-size)) calc(2 * var(--pixel-size)) #87CEEB,
+        calc(5 * var(--pixel-size)) calc(2 * var(--pixel-size)) #87CEEB,
+        calc(6 * var(--pixel-size)) calc(3 * var(--pixel-size)) #4682B4,
+        calc(3 * var(--pixel-size)) calc(3 * var(--pixel-size)) #87CEEB,
+        calc(4 * var(--pixel-size)) calc(3 * var(--pixel-size)) #B0E0E6,
+        calc(5 * var(--pixel-size)) calc(3 * var(--pixel-size)) #87CEEB,
+        calc(4 * var(--pixel-size)) calc(4 * var(--pixel-size)) #4682B4;
+}
+
+/* 胡萝卜 */
+.pixel-food.carrot::before {
+    content: '';
+    position: absolute;
+    width: var(--pixel-size);
+    height: var(--pixel-size);
+    background: transparent;
+    box-shadow:
+        calc(3 * var(--pixel-size)) calc(1 * var(--pixel-size)) #228B22,
+        calc(4 * var(--pixel-size)) calc(1 * var(--pixel-size)) #228B22,
+        calc(5 * var(--pixel-size)) calc(1 * var(--pixel-size)) #228B22,
+        calc(4 * var(--pixel-size)) calc(2 * var(--pixel-size)) #FF8C00,
+        calc(3 * var(--pixel-size)) calc(3 * var(--pixel-size)) #FF8C00,
+        calc(4 * var(--pixel-size)) calc(3 * var(--pixel-size)) #FFA500,
+        calc(5 * var(--pixel-size)) calc(3 * var(--pixel-size)) #FF8C00,
+        calc(4 * var(--pixel-size)) calc(4 * var(--pixel-size)) #FF8C00,
+        calc(4 * var(--pixel-size)) calc(5 * var(--pixel-size)) #FF8C00;
+}
+
+/* 浆果 */
+.pixel-food.berry::before {
+    content: '';
+    position: absolute;
+    width: var(--pixel-size);
+    height: var(--pixel-size);
+    background: transparent;
+    box-shadow:
+        calc(2 * var(--pixel-size)) calc(2 * var(--pixel-size)) #DC143C,
+        calc(3 * var(--pixel-size)) calc(1 * var(--pixel-size)) #DC143C,
+        calc(4 * var(--pixel-size)) calc(2 * var(--pixel-size)) #DC143C,
+        calc(3 * var(--pixel-size)) calc(2 * var(--pixel-size)) #FF6B6B,
+        calc(3 * var(--pixel-size)) calc(3 * var(--pixel-size)) #DC143C,
+        calc(5 * var(--pixel-size)) calc(3 * var(--pixel-size)) #DC143C,
+        calc(4 * var(--pixel-size)) calc(4 * var(--pixel-size)) #DC143C;
+}
+
+/* 食物被吃掉动画 */
+.pixel-food.eaten {
+    animation: pixelFoodEaten 0.5s ease forwards;
+}
+
+@keyframes pixelFoodEaten {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(0); opacity: 0; }
+}
